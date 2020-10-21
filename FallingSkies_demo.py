@@ -1,35 +1,29 @@
-
-# Importing turtle tool
 import turtle
-# Importing random tool
 import random
 
 score = 0
 lives = 3
 
-#Screen used for game/gameplay
-wn = turtle.Screen()
-wn.title("Falling Skies by @iNode.code") #Title of screen
+
+wn = turtle.Screen() #Screen 
+wn.title("Falling Skies: Fire,Fire Walk with Me") #Title 
 wn.bgcolor("green")
-wn.setup(width=800, height=600) # The height and width of screen
-wn.tracer(0)
+wn.setup(width=800, height=600) # The height and width 
+wn.tracer(0) #Mac trick
 
 
 
-# Create Player
-player = turtle.Turtle()
+
+player = turtle.Turtle() #  reate Player
 player.speed(0) # Animation speed fast as possible
 player.shape("square") # Shape of player
 player.color("white") # Color of player
-player.penup() # Player wont draw 
+player.penup() # Player won't draw 
 player.goto(0, -250) # Start turtle the bottom
 player.direction = "stop" # When game starts, player move left
 
 # Create list of good guys
 good_guys = []
-
-
-# Create the good_guy
 for _ in range(20):
     good_guy = turtle.Turtle()
     good_guy.speed(0) # Animation speed fast as possible //function speed
@@ -42,8 +36,6 @@ for _ in range(20):
 
 # Create list of bad guys
 bad_guys = []
-
-# Create the bad_guy
 for _ in range(20):
     bad_guy = turtle.Turtle()
     bad_guy.speed(0) # Animation speed fast as possible //function speed
@@ -67,7 +59,7 @@ pen.write("Score: {}    Lives: {}".format(score, lives), align="center", font=fo
 
 
 
-# Functions         //Think of functions as helper programs, within a program
+#  Move Left or Right
 def go_left():
     player.direction = "left"
     player.shape("square") # Original or left facing
@@ -76,17 +68,14 @@ def go_right():
     player.direction = "right"
     player.shape("square") # right facing
     
-
-# Keyboard Binding
 wn.listen()
 wn.onkeypress(go_left, "Left")
 wn.onkeypress(go_right, "Right")
 
 
-#Main Game Loop
-#While this is true, repeat
+#Main Game
+
 while True:
-    # Update screen
     wn.update()
 
     # Move the Player
@@ -102,20 +91,20 @@ while True:
 
 
 
-    # Move the good guys
+    # Move benefits
     for good_guy in good_guys: # For every good guy in good_guys list
         y = good_guy.ycor() # Gather his y position
         y -= good_guy.speed # utilizing the random tool in good_guy
         good_guy.sety(y) # Set position
 
 
-        # check if off the screen
+  
         if y < -300:
             x = random.randint(-380, 380) # Random tool to make game interesting, screen is 400x400
             y = random.randint(300, 400) # Start off screen?
             good_guy.goto(x, y) # Start from top
 
-        # Check for a collision with the player
+       
         if good_guy.distance(player) < 40: # If the distance from the good_guy to player is less than 40 //pixels are 40x40
             x = random.randint(-380, 380) # Random tool to make game interesting, screen is 400x400
             y = random.randint(300, 400) # Start off screen?
@@ -126,19 +115,18 @@ while True:
 
 
 
-# Move the bad guys
+    # Move the hazards
     for bad_guy in bad_guys: # For every bad guy in bad_guys list
         y = bad_guy.ycor() # Gather his y position
         y -= bad_guy.speed # utilizing the random tool in bad_guy
         bad_guy.sety(y) # Set position
 
-        # check if off the screen
         if y < -300:
             x = random.randint(-380, 380) # Random tool to make game interesting, screen is 400x400
             y = random.randint(300, 400) # Start off screen?
             bad_guy.goto(x, y) # Start from top
 
-        # Check for a collision with the player
+
         if bad_guy.distance(player) < 40: # If the distance from the bad_guy to player is less than 40 //pixels are 40x40
             x = random.randint(-380, 380) # Random tool to make game interesting, screen is 400x400
             y = random.randint(300, 400) # Start off screen?
@@ -148,4 +136,5 @@ while True:
             pen.clear() # To avoid overwriting on screen
             pen.write("Score: {}    Lives: {}".format(score, lives), align="center", font=font) # Updating and displaying score when collision accurs
        
+
 wn.mainloop()
