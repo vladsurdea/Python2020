@@ -7,16 +7,17 @@ lives = 3
 
 wn = turtle.Screen() #Screen 
 wn.title("Falling Skies: Fire,Fire Walk with Me") #Title 
-wn.bgcolor("green")
+wn.bgpic("Back.gif")
 wn.setup(width=800, height=600) # The height and width 
 wn.tracer(0) #Mac trick
 
-
-
+wn.register_shape("fbi.gif")
+wn.register_shape("poison.gif")
+wn.register_shape("rsz_suitcase.gif")
 
 player = turtle.Turtle() #  reate Player
 player.speed(0) # Animation speed fast as possible
-player.shape("square") # Shape of player
+player.shape("fbi.gif") # Shape of player
 player.color("white") # Color of player
 player.penup() # Player won't draw 
 player.goto(0, -250) # Start turtle the bottom
@@ -27,7 +28,7 @@ good_guys = []
 for _ in range(20):
     good_guy = turtle.Turtle()
     good_guy.speed(0) # Animation speed fast as possible //function speed
-    good_guy.shape("square") # Shape of player
+    good_guy.shape("rsz_suitcase.gif") # Shape of player
     good_guy.color("blue") # Color of player
     good_guy.penup() # Pen wont draw 
     good_guy.goto(-100, 250) # Start turtle from top left
@@ -39,7 +40,7 @@ bad_guys = []
 for _ in range(20):
     bad_guy = turtle.Turtle()
     bad_guy.speed(0) # Animation speed fast as possible //function speed
-    bad_guy.shape("square") # Shape of player
+    bad_guy.shape("poison.gif") # Shape of player
     bad_guy.color("red") # Color of player
     bad_guy.penup() # Player wont draw 
     bad_guy.goto(100, 250) # Start turtle the bottom
@@ -62,11 +63,11 @@ pen.write("Score: {}    Lives: {}".format(score, lives), align="center", font=fo
 #  Move Left or Right
 def go_left():
     player.direction = "left"
-    player.shape("square") # Original or left facing
+    player.shape("fbi.gif") # Original or left facing
 
 def go_right():
     player.direction = "right"
-    player.shape("square") # right facing
+    player.shape("fbi.gif") # right facing
     
 wn.listen()
 wn.onkeypress(go_left, "Left")
@@ -100,14 +101,14 @@ while True:
 
   
         if y < -300:
-            x = random.randint(-380, 380) # Random tool to make game interesting, screen is 400x400
-            y = random.randint(300, 400) # Start off screen?
+            x = random.randint(-580, 580) # Random tool to make game interesting, screen is 400x400
+            y = random.randint(500, 600) # Start off screen?
             good_guy.goto(x, y) # Start from top
 
        
         if good_guy.distance(player) < 40: # If the distance from the good_guy to player is less than 40 //pixels are 40x40
-            x = random.randint(-380, 380) # Random tool to make game interesting, screen is 400x400
-            y = random.randint(300, 400) # Start off screen?
+            x = random.randint(-580, 580) # Random tool to make game interesting, screen is 400x400
+            y = random.randint(600, 600) # Start off screen?
             good_guy.goto(x, y) # Start from top
             score += 10 # Increases score by 10
             pen.clear() # To avoid overwriting on screen
@@ -122,14 +123,14 @@ while True:
         bad_guy.sety(y) # Set position
 
         if y < -300:
-            x = random.randint(-380, 380) # Random tool to make game interesting, screen is 400x400
-            y = random.randint(300, 400) # Start off screen?
+            x = random.randint(-580, 580) # Random tool to make game interesting, screen is 400x400
+            y = random.randint(600, 600) # Start off screen?
             bad_guy.goto(x, y) # Start from top
 
 
         if bad_guy.distance(player) < 40: # If the distance from the bad_guy to player is less than 40 //pixels are 40x40
-            x = random.randint(-380, 380) # Random tool to make game interesting, screen is 400x400
-            y = random.randint(300, 400) # Start off screen?
+            x = random.randint(-580, 580) # Random tool to make game interesting, screen is 400x400
+            y = random.randint(500, 600) # Start off screen?
             bad_guy.goto(x, y) # Start from top
             score -= 10 # Decreases score by 10
             lives -= 1 # Everytime we collide with bad guy, take away one life
