@@ -4,7 +4,7 @@ Created on Sat Nov 21 12:56:48 2020
 
 @author: jmitc
 """
-from Question2 import Question
+from Question import Question
 import random
 import time
 import pyfiglet
@@ -66,7 +66,7 @@ you_lose = pyfiglet.figlet_format("you lose")
 
 
 def instructions():
-    """Display the Instructions of the game"""
+    """Display the Instructions of the game."""
     time.sleep(2.0)
     welcome = pyfiglet.figlet_format("WELCOME!!")
     bob = pyfiglet.figlet_format("BOB")
@@ -104,8 +104,15 @@ def instructions():
     
 
 def valid_answer(answer,question):
-    #need to fix this so that it only accepts T and F for T and F questions
-    """checks if the value input for answer is a valid option"""
+    """
+    Checks if the answer is a valid option and returns True once a valid answer 
+    is input.
+    
+    Parameters:
+        answer (str): user input 
+        question (Question): question chosen from questions based on position
+    
+    """
     while answer.lower() not in question.options:
         time.sleep(1.0)
         print("\n\nWhy do you waste my time with invalid answers! Try again you fool.\n")
@@ -116,7 +123,18 @@ def valid_answer(answer,question):
         
 #before you run the evaluate function you need a loop to determine when it breaks out
 def evaluate(questions, position):
-    """evaluate the answer and return True if correct and False if incorrect"""
+    """
+    Evaluate the answer and return True if correct and False if incorrect
+    
+    Parameters:
+        questions (list): the list of questions
+        position (value): position in list of questions
+    
+    Returns:
+        answer (str): user input
+        question (Question): question chosen from questions based on position
+    
+    """
     question = questions[position]
     print("\n\n" + question.prompt)
     answer = input(">> ")
@@ -128,7 +146,19 @@ def evaluate(questions, position):
 
 
 def score(questions):
-    """governs the running total of both right and lives"""
+    """
+    Receives value from the evaluate function to keep score, as well as 
+    propells the value corresponding to the next question.
+    
+    Parameters:
+        questions (list): the list of questions
+    
+    Returns:
+        lives (value): number of lives left
+        right (value): number of questions answered correctly
+        position (value): position in list of questions
+    
+    """
     lives = 3
     right = 0
     position = 0
@@ -150,9 +180,15 @@ def score(questions):
     game_over(lives)
     
 def end_warning(lives, right):
-    """this fuction will print a warning that the game is nearing an end
-    at either lives == 1 or  right == WIN - 1, and otherwise will return to the while loop
-    driving score() function"""
+    """
+    Prints a warning that the user has one life left or if the user is one 
+    correct answer away from winning the game.
+    
+    Parameters:
+        right (value): the number of questions answered correctly
+        lives (value): the number of lives left
+    
+    """
     if lives == 1 and not right >= WIN -1:
         print("\nYou have one life left! Muahahahahaha.")
     elif right == WIN - 1:
@@ -160,7 +196,11 @@ def end_warning(lives, right):
 
 
 def game_over(lives):
-    """determines whether the player has won or lost"""
+    """Determines whether the player has won or lost.
+    
+    Parameters:
+        lives (value): the number of lives left
+    """
     time.sleep(2.0)
     if lives==0:
         print(you_lose)
@@ -172,7 +212,11 @@ def game_over(lives):
         print("Your may have defeated me but I'll be back! You haven't seen the last of BOB!!!")
 
 def play():
-    """this function will start the game if they player agrees, end the game if the player so chooses"""
+    """
+    Returns true if user inputs 'y', returns false if user inputs 'n', and prompts the user for
+    a valid response if otherwise.
+    
+    """
     GO = ["y","n"]
     play =  input("\nThink you know more than BOB? (y/n): \n\n>>")       
     while play not in GO:
