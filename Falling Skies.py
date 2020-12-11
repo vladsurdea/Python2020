@@ -1,3 +1,18 @@
+"""
+Created on Fri Dec 4 12:50 2020
+@author: Vlad Surdea-Hernea
+"""
+
+"""Falling Skies
+The following script uses the turtle module in order to use basic graphics in Python, 
+and the random module in order to make random numbers used for the dynamics of the game.
+
+The game puts the player in the shoes of Agen Cooper that needs to avoid the poisonous
+hazards droping from the sky, while also collecting the beneficial suitcases 
+—proper for an FBI agent! 
+
+"""
+
 import turtle ### allows for basic graphics
 import random ### will help us set some random elements for the game
 
@@ -69,91 +84,91 @@ pen.write("Score: {}    Lives: {}".format(score, lives), align="center", font=fo
 
 
 
-###  Move Left or Right ###
 
+
+# Functions         //Think of functions as helper programs, within a program
 def go_left():
-    """This function defines the movement of the player to the left of the screen"""
+    """Function that defines moving to the left"""
     player.direction = "left"
     player.shape("fbi.gif") 
 
 def go_right():
-        """This function defines the movement of the player to the right of the screen"""
+    """Function that defines moving to the right"""
     player.direction = "right"
     player.shape("fbi.gif") 
     
-### Couple functions with keyboard ###
-wn.listen() # The linking part 
-wn.onkeypress(go_left, "Left") # when you press <-, the player moves to the left 
-wn.onkeypress(go_right, "Right")# when you press ->, the player moves to the right
+
+# Keyboard Binding
+wn.listen()
+wn.onkeypress(go_left, "Left")
+wn.onkeypress(go_right, "Right")
 
 
-######## MAIN GAME ###########
+######## PRE-GAME ###########
 ##############################
 
 while True:
+    # Update screen
     wn.update()
 
-### Move the Player along the screen###
-
-# Move left
-    if player.direction == "left":
-        x = player.xcor() 
-        x = x-1 
-        player.setx(x) 
-        
-# Move right    
-    if player.direction == "right": 
-        x = player.xcor() 
-        x = x+1 
-        player.setx(x) 
+    # Move the Player
+    if player.direction == "left": # -x Coordinate
+        x = player.xcor() # Stores the xcor of player in x, starts at 0 on X axis
+        x -= 1 # minus 1 from x, this will repeat because it is true
+        player.setx(x) # Set coordinate
+    
+    if player.direction == "right": # -x Coordinate
+        x = player.xcor() # Stores the xcor of player in x, starts at 0 on X axis
+        x += 1 # minus 1 from x, this will repeat because it is true
+        player.setx(x) # Set coordinate    
 
 
 
-### Move benefits ###
-
-# For every good guy in good_guys list gather y position and ajust it randomly
+    # Move the good guys
     for good_guy in good_guys: 
         y = good_guy.ycor() 
         y -= good_guy.speed 
         good_guy.sety(y) 
 
+
+        # check if off the screen
         if y < -300:
-            x = random.randint(-580, 580) 
-            y = random.randint(500, 600) 
+            x = random.randint(-380, 380) # Random tool to make game interesting, screen is 400x400
+            y = random.randint(300, 400) 
             good_guy.goto(x, y) 
-            
-# If the distance from the good_guy to player is less than a pixel, adjust scoreboard and positions ; avoid screen overwrite
-        if good_guy.distance(player) < 40: 
-            x = random.randint(-580, 580) 
-            y = random.randint(600, 600)
+
+        # Check for a collision with the player
+        if good_guy.distance(player) < 40: # Check if the distance from the bad_guy to player is less than a pixel
+            x = random.randint(-380, 380) 400
+            y = random.randint(300, 400) 
             good_guy.goto(x, y) 
-            score += 10 
-            pen.clear()
+            score += 10 # Increases score by 10
+            pen.clear() # To avoid overwriting on screen
             pen.write("Score: {}    Lives: {}".format(score, lives), align="center", font=font) # Updating scoreboard
 
 
-### Move hazards ###
 
-# For every bad guy in good_guys list gather y position and ajust it randomly
-    for bad_guy in bad_guys:
-        y = bad_guy.ycor()
-        y -= bad_guy.speed 
+# Move the hazards
+    for bad_guy in bad_guys: 
+        y = bad_guy.ycor() 
+        y -= bad_guy.speed
         bad_guy.sety(y) 
 
+        # check if off the screen
         if y < -300:
-            x = random.randint(-580, 580) 
-            y = random.randint(600, 600)
+            x = random.randint(-380, 380) # Random tool to make game interesting, screen is 400x400
+            y = random.randint(300, 400) # Start off screen?
+            bad_guy.goto(x, y) # Start from top
+
+        # Check for a collision with the player
+        if bad_guy.distance(player) < 40: # Check if the distance from the bad_guy to player is less than a pixel
+            x = random.randint(-380, 380) 
+            y = random.randint(300, 400) 
             bad_guy.goto(x, y) 
-            
-# If the distance from the good_guy to player is less than a pixel, adjust scoreboard and positions ; avoid screen overwrite
-        if bad_guy.distance(player) < 40: 
-            x = random.randint(-580, 580) 
-            y = random.randint(500, 600) 
-            bad_guy.goto(x, y) 
-            score -= 10 
-            lives -= 1
-            pen.clear() 
+            score -= 10 # Decreases score 
+            lives -= 1 # Lose one life
+            pen.clear() # Avoid overwriting on screen
             pen.write("Score: {}    Lives: {}".format(score, lives), align="center", font=font) # Updating scoreboard
        
-
 wn.mainloop()
+
