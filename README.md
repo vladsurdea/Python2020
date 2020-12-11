@@ -1,2 +1,2 @@
 # Python2020
-A repository for all things related to "Fire,fire walk with me"
+This repository contains all the mini-games that have been developed by Mitchell Burns, Sofia Sukhova and Vlad Surdea-Hernea for the purpose of GRAD-E1326: Python Programming for Data Scientists class.
