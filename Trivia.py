@@ -1,4 +1,4 @@
-# -*- coding: utf-8 -*-
+ # -*- coding: utf-8 -*-
 """
 Created on Sat Nov 21 12:56:48 2020
 
@@ -40,18 +40,18 @@ questions = [
 WIN = (len(questions)//2)
 
 #list of responses BOB gives you when you answer a question correctly
-BOB_response_right = ["Looks like you know your stuff. But you won't get the next one right!",
+bob_response_right = ["Looks like you know your stuff. But you won't get the next one right!",
                       "Don't get too confident there bub! BOB knows all and knows you can't hack it.",
                       "Ha! That one was an easy one.",
                       "Any pee-brain knows that.",
                       "GRRGGRH!!!",
-                      "You may know that, but I know that you'll never escape this lodge!",
-                      "WHO TOLD YOU THE ANSWERS!!1",
+                      "You may know that, but I know you'll never escape!",
+                      "WHO TOLD YOU THE ANSWERS!!",
                       "You're laughing now but just wait for the next one!"]
 
-idiot = pyfiglet.figlet_format("IDIOT!")
-#list of responses when you answer a question incorrectly
-BOB_response_wrong = ["Hahahah, and you thought you could win!",
+
+#list of responses BOB gives you when you answer a question incorrectly
+bob_response_wrong = ["Hahahah, and you thought you could win!",
                       "MMMMMMMMmmm I just ate one of your DELICIOUS lives.",
                       "You fool! Are you even a real detective?",
                       "This is gonna be easier than I thought.",
@@ -121,7 +121,7 @@ def valid_answer(answer,question):
         answer = input(">> ")
     return True
         
-#before you run the evaluate function you need a loop to determine when it breaks out
+
 def evaluate(questions, position):
     """
     Evaluate the answer and return True if correct and False if incorrect
@@ -167,12 +167,12 @@ def score(questions):
         if evaluate(questions, position):
             right+=1
             if right < WIN -1:
-                print("\n"+ random.choice(BOB_response_right))
+                print("\n"+ random.choice(bob_response_right))
                 time.sleep(3.0)
         else:
             lives-=1
             if lives > 1:
-                print("\n"+ random.choice(BOB_response_wrong))
+                print("\n"+ random.choice(bob_response_wrong))
                 time.sleep(3.0)
         position+=1
         end_warning(lives, right)
@@ -246,14 +246,9 @@ def main():
         
 
 
-    
+        
+        
 main()
-
-
-
-        
-        
-
 
 
 

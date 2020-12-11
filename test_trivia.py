@@ -6,7 +6,7 @@ Created on Fri Dec 11 21:50:59 2020
 """
 
 import unittest as ut
-from Trivia_Game_Fire import valid_answer, evaluate, questions
+from Trivia import valid_answer, evaluate, questions
 
 class TestTrivia(ut.TestCase):
     
