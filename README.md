@@ -12,3 +12,4 @@ The three games open up separately, and can be played on all OSs. All mini-games
 
 As an extra-feature, we started developing a basic UI that would allow the users to choose which games to play at which time. While this is not part of the original proposal for the project, it will be developed by Mitchell Burns, Sofia Sukhova and Vlad Surdea-Hernea for future references (and for fun!). 
 
+The playability of the games does not depend on installing specific software, and all the modules that have been used for developing the script are properly referenced.
